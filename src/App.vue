@@ -2,10 +2,11 @@
   <!-- 실제로 html 로 렌더링 되는 곳 -->
   <div>
     <NavBar />
+    <Event :text="text" />
     <h1>영화정보</h1>
     <div v-for="(movie, i) in data" :key="i" class="item">
       <figure>
-        <!-- 동적인 값을 넣을때 속성 앞에 ':'(콜론)을 넣어야 함. -->
+        <!-- (데이터 바인딩)동적인 값을 넣을때 속성 앞에 ':'(콜론)을 넣어야 함. -->
         <img :src="`${movie.imgUrl}`" :alt="`${movie.title}`" />
       </figure>
       <div class="info">
@@ -34,6 +35,7 @@
 <script>
 import data from "./assets/movies";
 import NavBar from "./components/NavBar.vue";
+import Event from "./components/Event.vue";
 export default {
   name: "App",
   //문서에 표시될 변수를 선언할 수 있음 (state)
@@ -42,6 +44,7 @@ export default {
       isModal: false,
       data: data,
       selectedMovie: 0,
+      text: "NETPLIX 강렬한 운명의 드라마, 경기크리처",
     };
   },
   methods: {
@@ -49,7 +52,7 @@ export default {
       this.data[i].like++;
     },
   },
-  components: { NavBar: NavBar },
+  components: { NavBar: NavBar, Event: Event },
 };
 </script>
 
