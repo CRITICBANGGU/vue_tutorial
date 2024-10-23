@@ -4,6 +4,8 @@
     <h1>영화정보</h1>
     <div v-for="(movie, i) in data" :key="i">
       <div>
+    <div v-for="(movie, i) in data" :key="i" class="item">
+      <div class="info">
         <!-- :속성명 = "데이터" -->
         <h3 class="bg-yellow" :style="textRed">{{ movie.title }}</h3>
         <p>개봉 : {{ movie.year }}</p>
@@ -55,6 +57,48 @@ export default {
 </script>
 
 <style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+body {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1,
+h2,
+h3 {
+  margin-bottom: 1rem;
+}
+p {
+  margin-bottom: 0.5rem;
+}
+button {
+  margin-right: 10px;
+  margin-top: 1rem;
+}
+.item {
+  width: 100%;
+  border: 1px solid #ccc;
+  display: flex;
+  margin-bottom: 20px;
+  padding: 1rem;
+}
+.item figure {
+  width: 30%;
+  margin-right: 1rem;
+}
+
+.item img {
+  width: 100%;
+}
+
+.item .info {
+  width: 100%;
+}
+
 .bg-yellow {
   background-color: gold;
   padding: 10px;
