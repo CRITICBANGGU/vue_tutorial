@@ -1,6 +1,7 @@
 <template>
   <!-- 실제로 html 로 렌더링 되는 곳 -->
   <div>
+    <NavBar />
     <h1>영화정보</h1>
     <div v-for="(movie, i) in data" :key="i" class="item">
       <figure>
@@ -9,7 +10,7 @@
       </figure>
       <div class="info">
         <!-- :속성명 = "데이터" -->
-        <h3 class="bg-yellow" :style="textRed">{{ movie.title }}</h3>
+        <h3 class="bg-yellow">{{ movie.title }}</h3>
         <p>개봉 : {{ movie.year }}</p>
         <p>장르 : {{ movie.category }}</p>
         <!-- 클릭할 때, v-on 속성 사용하면 됨(v-on:이벤트면 ="실행코드") v-on이라고
@@ -32,7 +33,7 @@
 
 <script>
 import data from "./assets/movies";
-console.log(data);
+import NavBar from "./components/NavBar.vue";
 export default {
   name: "App",
   //문서에 표시될 변수를 선언할 수 있음 (state)
@@ -40,6 +41,7 @@ export default {
     return {
       isModal: false,
       data: data,
+      selectedMovie: 0,
     };
   },
   methods: {
@@ -47,6 +49,7 @@ export default {
       this.data[i].like++;
     },
   },
+  components: { NavBar: NavBar },
 };
 </script>
 
