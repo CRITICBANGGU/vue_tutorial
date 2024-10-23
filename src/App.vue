@@ -31,36 +31,15 @@
 </template>
 
 <script>
+import data from "./assets/movies";
+console.log(data);
 export default {
   name: "App",
   //문서에 표시될 변수를 선언할 수 있음 (state)
   data() {
     return {
       isModal: false,
-      data: [
-        {
-          title: "노량",
-          year: 2023,
-          category: "액션, 드라마",
-          textRed: "color:red",
-          like: 0,
-          imgUrl: "./assets/노량.webp",
-        },
-        {
-          title: "아쿠아맨과 로스트 킹덤",
-          year: 2023,
-          category: "액션, 판타지, 어드벤처",
-          like: 0,
-          imgUrl: "./assets/아쿠아맨.webp",
-        },
-        {
-          title: "3일의 휴가",
-          year: 2023,
-          category: "판타지, 드라마",
-          like: 0,
-          imgUrl: "./assets/3일의휴가.webp",
-        },
-      ],
+      data: data,
     };
   },
   methods: {
