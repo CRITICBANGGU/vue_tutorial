@@ -16,6 +16,15 @@
         안쓰고 그냥 @이로 대체해도 됨 -->
         <button @:click="increaseLike(i)">좋아요</button>
         <span>{{ movie.like }}</span>
+        <p><button @click="isModal = true">상세보기</button></p>
+      </div>
+    </div>
+    <!-- 조건문 v-if -->
+    <div class="modal" v-if="isModal">
+      <div class="inner">
+        <h3>Detail</h3>
+        <p>영화 제목</p>
+        <button @click="isModal = false">닫기</button>
       </div>
     </div>
   </div>
@@ -27,6 +36,7 @@ export default {
   //문서에 표시될 변수를 선언할 수 있음 (state)
   data() {
     return {
+      isModal: false,
       data: [
         {
           title: "노량",
@@ -107,5 +117,24 @@ button {
 .bg-yellow {
   background-color: gold;
   padding: 10px;
+}
+
+.modal {
+  background: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal .inner {
+  background-color: #fff;
+  width: 80%;
+  padding: 20px;
+  border-radius: 10px;
 }
 </style>
