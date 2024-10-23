@@ -2,18 +2,18 @@
   <!-- 실제로 html 로 렌더링 되는 곳 -->
   <div>
     <h1>영화정보</h1>
-    <div>
-      <!-- :속성명 = "데이터" -->
-      <h3 class="bg-yellow" :style="textRed">{{ title }}</h3>
-      <p>개봉 : {{ year }}</p>
-      <p>장르 : {{ category }}</p>
+    <div v-for="(movie, i) in data" :key="i">
+      <div>
+        <!-- :속성명 = "데이터" -->
+        <h3 class="bg-yellow" :style="textRed">{{ movie.title }}</h3>
+        <p>개봉 : {{ movie.year }}</p>
+        <p>장르 : {{ movie.category }}</p>
+        <!-- 클릭할 때, v-on 속성 사용하면 됨(v-on:이벤트면 ="실행코드") v-on이라고
+        안쓰고 그냥 @이로 대체해도 됨 -->
+        <button @:click="increaseLike(i)">좋아요</button>
+        <span>{{ movie.like }}</span>
+      </div>
     </div>
-    <p>{{ foods[0] }}</p>
-    <p>{{ foods[1] }}</p>
-    <p>{{ foods[2] }}</p>
-    <!-- for문 사용하기 "v-for="(아이템, key)in 배열데이터"" -->
-    <!-- key 속성 없으면 에러뜸 -->
-    <p v-for="(item, i) in foods" :key="i">{{ item }}</p>
   </div>
 </template>
 
@@ -23,12 +23,33 @@ export default {
   //문서에 표시될 변수를 선언할 수 있음 (state)
   data() {
     return {
-      foods: ["김밥", "순대", "만두"],
-      title: "노량",
-      year: 2023,
-      category: "액션, 드라마",
-      textRed: "color:red",
+      data: [
+        {
+          title: "노량",
+          year: 2023,
+          category: "액션, 드라마",
+          textRed: "color:red",
+          like: 0,
+        },
+        {
+          title: "아쿠아맨과 로스트 킹덤",
+          year: 2023,
+          category: "액션, 판타지, 어드벤처",
+          like: 0,
+        },
+        {
+          title: "3일의 휴가",
+          year: 2023,
+          category: "판타지, 드라마",
+          like: 0,
+        },
+      ],
     };
+  },
+  methods: {
+    increaseLike(i) {
+      this.data[i].like++;
+    },
   },
 };
 </script>
