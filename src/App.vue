@@ -2,9 +2,11 @@
   <!-- 실제로 html 로 렌더링 되는 곳 -->
   <div>
     <h1>영화정보</h1>
-    <div v-for="(movie, i) in data" :key="i">
-      <div>
     <div v-for="(movie, i) in data" :key="i" class="item">
+      <figure>
+        <!-- 동적인 값을 넣을때 속성 앞에 ':'(콜론)을 넣어야 함. -->
+        <img :src="`${movie.imgUrl}`" :alt="`${movie.title}`" />
+      </figure>
       <div class="info">
         <!-- :속성명 = "데이터" -->
         <h3 class="bg-yellow" :style="textRed">{{ movie.title }}</h3>
@@ -32,18 +34,21 @@ export default {
           category: "액션, 드라마",
           textRed: "color:red",
           like: 0,
+          imgUrl: "./assets/노량.webp",
         },
         {
           title: "아쿠아맨과 로스트 킹덤",
           year: 2023,
           category: "액션, 판타지, 어드벤처",
           like: 0,
+          imgUrl: "./assets/아쿠아맨.webp",
         },
         {
           title: "3일의 휴가",
           year: 2023,
           category: "판타지, 드라마",
           like: 0,
+          imgUrl: "./assets/3일의휴가.webp",
         },
       ],
     };
