@@ -2,7 +2,7 @@
   <!-- 실제로 html 로 렌더링 되는 곳 -->
   <div>
     <NavBar />
-    <Event :text="text" />
+    <Event :text="text[eventTextNum]" />
     <SearchBar :data="data_temp" @searchMovie="searchMovie($event)" />
     <button @click="showAllMovies()">전체보기</button>
     <Movies
@@ -38,7 +38,13 @@ export default {
       data: data,
       data_temp: [...data], //사본
       selectedMovie: 0,
-      text: "NETPLIX 강렬한 운명의 드라마, 경기크리처",
+      text: [
+        "NETPLIX 강렬한 운명의 드라마, 경기크리처",
+        "디즈니 100주년 기념작, 위시",
+        "그날, 대한민국의 운명의 바뀌었다. 서울의 봄",
+      ],
+      eventTextNum: 0,
+      interval: null,
     };
   },
   methods: {
@@ -66,6 +72,19 @@ export default {
     Event: Event,
     Movies: Movies,
     SearchBar: SearchBar,
+  },
+  mounted() {
+    console.log("mounted");
+    this.interval = setInterval(() => {
+      if (this.eventTextNum == this.text.length - 1) {
+        this.eventTextNum = 0;
+      } else {
+        this.eventTextNum += 1;
+      }
+    }, 3000);
+  },
+  unmounted() {
+    clearInterval(this.interval);
   },
 };
 </script>
