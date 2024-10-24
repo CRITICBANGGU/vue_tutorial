@@ -29,12 +29,19 @@
         <button @click="isModal = false">닫기</button>
       </div>
     </div>
+    <Modal
+      :data="data"
+      :isModal="isModal"
+      :selectedMovie="selectedMovie"
+      @closeModal="isModal = false"
+    />
   </div>
 </template>
 
 <script>
 import data from "./assets/movies";
 import NavBar from "./components/NavBar.vue";
+import Modal from "./components/Modal.vue";
 import Event from "./components/Event.vue";
 export default {
   name: "App",
@@ -52,7 +59,7 @@ export default {
       this.data[i].like++;
     },
   },
-  components: { NavBar: NavBar, Event: Event },
+  components: { NavBar: NavBar, Modal: Modal, Event: Event },
 };
 </script>
 
