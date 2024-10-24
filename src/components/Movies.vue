@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1>영화정보</h1>
-    <div v-for="(movie, i) in data" :key="i" class="item">
+    <div v-for="movie in data" :key="movie.id" class="item">
       <figure>
         <!-- (데이터 바인딩)동적인 값을 넣을때 속성 앞에 ':'(콜론)을 넣어야 함. -->
         <img :src="`${movie.imgUrl}`" :alt="`${movie.title}`" />
@@ -14,10 +14,10 @@
         <!-- 클릭할 때, v-on 속성 사용하면 됨(v-on:이벤트면 ="실행코드") v-on이라고
         안쓰고 그냥 @이로 대체해도 됨 -->
         <!-- <button @:click="increaseLike(i)">좋아요</button> -->
-        <button @:click="$emit('increaseLike', i)">좋아요</button>
+        <button @:click="$emit('increaseLike', movie.id)">좋아요</button>
         <span>{{ movie.like }}</span>
         <p>
-          <button @click="$emit('openModal', i)">상세보기</button>
+          <button @click="$emit('openModal', movie.id)">상세보기</button>
         </p>
       </div>
     </div>

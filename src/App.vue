@@ -3,8 +3,10 @@
   <div>
     <NavBar />
     <Event :text="text" />
+    <SearchBar :data="data_temp" @searchMovie="searchMovie($event)" />
+    <button @click="showAllMovies()">전체보기</button>
     <Movies
-      :data="data"
+      :data="data_temp"
       @openModal="
         isModal = true;
         selectedMovie = $event;
@@ -26,6 +28,7 @@ import NavBar from "./components/NavBar.vue";
 import Modal from "./components/Modal.vue";
 import Event from "./components/Event.vue";
 import Movies from "./components/Movies.vue";
+import SearchBar from "./components/SearchBar.vue";
 export default {
   name: "App",
   //문서에 표시될 변수를 선언할 수 있음 (state)
@@ -33,16 +36,37 @@ export default {
     return {
       isModal: false,
       data: data,
+      data_temp: [...data], //사본
       selectedMovie: 0,
       text: "NETPLIX 강렬한 운명의 드라마, 경기크리처",
     };
   },
   methods: {
-    increaseLike(i) {
-      this.data[i].like++;
+    increaseLike(id) {
+      // this.data[i].like++;
+      this.data.find((movie) => {
+        if (movie.id == id) {
+          movie.like += 1;
+        }
+      });
+    },
+    searchMovie(title) {
+      //영화 제목이 포함된 데이터를 가져오기
+      this.data_temp = this.data.filter((movie) => {
+        return movie.title.includes(title);
+      });
+    },
+    showAllMovies() {
+      this.data_temp = [...this.data];
     },
   },
-  components: { NavBar: NavBar, Modal: Modal, Event: Event, Movies: Movies },
+  components: {
+    NavBar: NavBar,
+    Modal: Modal,
+    Event: Event,
+    Movies: Movies,
+    SearchBar: SearchBar,
+  },
 };
 </script>
 
