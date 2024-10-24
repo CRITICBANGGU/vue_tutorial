@@ -3,32 +3,14 @@
   <div>
     <NavBar />
     <Event :text="text" />
-    <h1>영화정보</h1>
-    <div v-for="(movie, i) in data" :key="i" class="item">
-      <figure>
-        <!-- (데이터 바인딩)동적인 값을 넣을때 속성 앞에 ':'(콜론)을 넣어야 함. -->
-        <img :src="`${movie.imgUrl}`" :alt="`${movie.title}`" />
-      </figure>
-      <div class="info">
-        <!-- :속성명 = "데이터" -->
-        <h3 class="bg-yellow">{{ movie.title }}</h3>
-        <p>개봉 : {{ movie.year }}</p>
-        <p>장르 : {{ movie.category }}</p>
-        <!-- 클릭할 때, v-on 속성 사용하면 됨(v-on:이벤트면 ="실행코드") v-on이라고
-        안쓰고 그냥 @이로 대체해도 됨 -->
-        <button @:click="increaseLike(i)">좋아요</button>
-        <span>{{ movie.like }}</span>
-        <p><button @click="isModal = true">상세보기</button></p>
-      </div>
-    </div>
-    <!-- 조건문 v-if -->
-    <div class="modal" v-if="isModal">
-      <div class="inner">
-        <h3>Detail</h3>
-        <p>영화 제목</p>
-        <button @click="isModal = false">닫기</button>
-      </div>
-    </div>
+    <Movies
+      :data="data"
+      @openModal="
+        isModal = true;
+        selectedMovie = $event;
+      "
+      @increaseLike="increaseLike($event)"
+    />
     <Modal
       :data="data"
       :isModal="isModal"
@@ -43,6 +25,7 @@ import data from "./assets/movies";
 import NavBar from "./components/NavBar.vue";
 import Modal from "./components/Modal.vue";
 import Event from "./components/Event.vue";
+import Movies from "./components/Movies.vue";
 export default {
   name: "App",
   //문서에 표시될 변수를 선언할 수 있음 (state)
@@ -59,7 +42,7 @@ export default {
       this.data[i].like++;
     },
   },
-  components: { NavBar: NavBar, Modal: Modal, Event: Event },
+  components: { NavBar: NavBar, Modal: Modal, Event: Event, Movies: Movies },
 };
 </script>
 
